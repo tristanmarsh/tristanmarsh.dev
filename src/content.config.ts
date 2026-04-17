@@ -23,6 +23,8 @@ export const collections = {
 			publishDate: z.coerce.date(),
 			tags: z.array(z.string()),
 			draft: z.boolean().optional(),
+			img: z.string().optional(),
+			img_alt: z.string().optional(),
 		}),
 	}),
 };

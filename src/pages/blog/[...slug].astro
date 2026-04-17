@@ -4,7 +4,6 @@ import { render } from 'astro:content';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
@@ -48,6 +47,13 @@ const formattedDate = entry.data.publishDate.toLocaleDateString('en-AU', {
 							<p class="description">{entry.data.description}</p>
 						</div>
 					</Hero>
+					{entry.data.img && (
+						<img
+							class="hero-img"
+							src={entry.data.img}
+							alt={entry.data.img_alt || ''}
+						/>
+					)}
 				</div>
 			</header>
 			<main class="wrapper">
@@ -56,7 +62,6 @@ const formattedDate = entry.data.publishDate.toLocaleDateString('en-AU', {
 				</div>
 			</main>
 		</div>
-		<ContactCTA />
 	</div>
 </BaseLayout>
 
@@ -64,6 +69,15 @@ const formattedDate = entry.data.publishDate.toLocaleDateString('en-AU', {
 	header {
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.hero-img {
+		width: 100%;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+		border: 1px solid var(--gray-800);
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
 	}
 
 	.back-link {
