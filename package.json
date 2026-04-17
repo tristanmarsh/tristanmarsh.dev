@@ -10,6 +10,7 @@
     "deploy": "pnpm run build && wrangler deploy",
     "cf-typegen": "wrangler types",
     "test:e2e": "npx playwright test --ignore-snapshots",
+    "test:e2e:ui": "npx playwright test --ignore-snapshots --ui",
     "test:e2e:preview": "PW_MODE=preview npx playwright test --ignore-snapshots",
     "test:e2e:screenshots": "PW_SCREENSHOTS=1 npx playwright test e2e/screenshots.spec.ts",
     "test:e2e:a11y": "PW_A11Y=1 npx playwright test --ignore-snapshots"

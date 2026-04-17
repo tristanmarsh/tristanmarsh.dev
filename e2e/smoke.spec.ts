@@ -5,6 +5,7 @@ const pages = [
   { name: 'home', path: '/' },
   { name: 'work', path: '/work/' },
   { name: 'about', path: '/about/' },
+  { name: 'blog', path: '/blog/' },
   { name: 'uses', path: '/uses/' },
 ];
 
@@ -53,21 +54,3 @@ for (const { name, path } of pages) {
     });
   });
 }
-
-// Blog pages — fixme until task 0001 lands
-test.describe('blog index (/blog)', () => {
-  test.fixme(true, 'Blog routes not yet implemented (task 0001)');
-
-  test('returns 200', async ({ page }) => {
-    const response = await page.goto('/blog/');
-    expect(response?.status()).toBe(200);
-  });
-
-  test('has title and meta description', async ({ page }) => {
-    await page.goto('/blog/');
-    const title = await page.title();
-    expect(title).toBeTruthy();
-    const description = page.locator('meta[name="description"]');
-    await expect(description).toHaveAttribute('content', /.+/);
-  });
-});

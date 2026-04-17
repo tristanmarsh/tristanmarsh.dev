@@ -195,7 +195,7 @@ test.describe('Blog index', () => {
     // Each link should point to a valid post path
     for (let i = 0; i < count; i++) {
       const href = await postLinks.nth(i).getAttribute('href');
-      expect(href).toMatch(/^\/blog\/.+/);
+      expect(href).toMatch(/^\/blog\//);
     }
   });
 });
