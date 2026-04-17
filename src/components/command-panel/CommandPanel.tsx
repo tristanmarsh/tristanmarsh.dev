@@ -117,6 +117,9 @@ function Home({ pushPage }: { pushPage: (newPage: string, clearInput?: boolean) 
         <Command.Item keywords={['home']} onSelect={() => navigate('/')}>
           Home
         </Command.Item>
+        <Command.Item keywords={['blog', 'post', 'writing', 'notes']} onSelect={() => navigate('/blog')}>
+          Blog
+        </Command.Item>
         <Command.Item keywords={['about']} onSelect={() => navigate('/about')}>
           About
         </Command.Item>
