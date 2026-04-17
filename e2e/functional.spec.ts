@@ -183,11 +183,9 @@ test.describe('Command palette', () => {
   });
 });
 
-// ---------- Blog (fixme until task 0001) ----------
+// ---------- Blog ----------
 
 test.describe('Blog index', () => {
-  test.fixme(true, 'Blog routes not yet implemented (task 0001)');
-
   test('lists posts with links', async ({ page }) => {
     await page.goto('/blog/');
     const postLinks = page.locator('a[href^="/blog/"]');
@@ -203,8 +201,6 @@ test.describe('Blog index', () => {
 });
 
 test.describe('Blog post', () => {
-  test.fixme(true, 'Blog routes not yet implemented (task 0001)');
-
   test('renders title, date, tags, and body content', async ({ page }) => {
     // Navigate to blog index first to find a post link
     await page.goto('/blog/');
