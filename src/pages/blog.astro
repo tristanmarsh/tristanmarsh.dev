@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import Pill from '../components/Pill.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<BaseLayout
+	title="Blog | Tristan Marsh"
+	description="Read Tristan Marsh's latest thoughts on AI-assisted development and creative coding"
+>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero
+				title="Blog"
+				tagline="Thoughts on AI-assisted development, creative coding, and lessons learned."
+				align="start"
+			/>
+			<ul class="post-list">
+				{
+					posts.map((post) => (
+						<li>
+							<a class="post-link" href={`/blog/${post.id}/`}>
+								<div class="post-content">
+									<div class="post-header">
+										<h2 class="post-title">{post.data.title}</h2>
+										<time datetime={post.data.publishDate.toISOString()}>
+											{post.data.publishDate.toLocaleDateString('en-AU', {
+												year: 'numeric',
+												month: 'long',
+												day: 'numeric',
+											})}
+										</time>
+									</div>
+									<p class="post-description">{post.data.description}</p>
+									{post.data.tags.length > 0 && (
+										<div class="post-tags">
+											{post.data.tags.map((tag) => (
+												<Pill>{tag}</Pill>
+											))}
+										</div>
+									)}
+								</div>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.post-link {
+		display: block;
+		text-decoration: none;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		padding: 1.5rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		transition: box-shadow var(--theme-transition);
+	}
+
+	.post-link:hover,
+	.post-link:focus-visible {
+		box-shadow: var(--shadow-md);
+	}
+
+	.post-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.post-header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.post-title {
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+		margin: 0;
+	}
+
+	time {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
+	}
+
+	.post-description {
+		font-size: var(--text-md);
+		color: var(--gray-300);
+		margin: 0;
+	}
+
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	@media (min-width: 50em) {
+		.post-header {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: baseline;
+		}
+
+		.post-title {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>
